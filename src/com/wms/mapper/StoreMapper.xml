@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wms.mapper.StoreMapper">
+  <resultMap id="StoreMap" type="com.wms.model.Store">
+    <id column="storeid" jdbcType="INTEGER" property="storeid" />
+    <result column="storecode" jdbcType="VARCHAR" property="storecode" />
+    <result column="storename" jdbcType="VARCHAR" property="storename" />
+    <result column="storetime" jdbcType="VARCHAR" property="storetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    storeid, storecode, storename, storetime
+  </sql>
+  <select id="getStoreList"  resultMap="StoreMap">
+    select 
+    <include refid="Base_Column_List" />
+    from store where 1=1
+  </select>
+</mapper>

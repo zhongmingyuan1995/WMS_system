@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wms.mapper.StoreMapper">
+  <resultMap id="ProductMap" type="com.wms.model.Product">
+    <id column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="producttime" jdbcType="VARCHAR" property="producttime" />
+    <association property="store" javaType="store">
+    <id property="storeid" column="storeid"/>
+    <result column="storecode" jdbcType="VARCHAR" property="storecode" />
+    <result column="storename" jdbcType="VARCHAR" property="storename" />
+    <result column="storetime" jdbcType="VARCHAR" property="storetime" />
+ 	</association>
+  </resultMap>
+  <select id="getStoreById" parameterType="java.lang.String" resultMap="ProductMap">
+    select 
+    productid, productname, producttime,storeid,store.storecode,storename,storetime
+    from (product INNER JOIN store on store.storecode = product.storecode) where product.storecode = #{storecode}
+  </select>
+</mapper>
